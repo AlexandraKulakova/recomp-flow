@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-store, max-age=0" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>Recomp Flow</title>
+    <title>Prime Era</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,19 +15,19 @@
     />
     <style>
 :root {
-  --bg: #f5efe3;
-  --paper: rgba(255, 251, 245, 0.82);
-  --paper-strong: rgba(255, 251, 245, 0.94);
-  --ink: #1b1a16;
-  --muted: #645f57;
-  --line: rgba(39, 35, 26, 0.1);
-  --accent: #dd6f3f;
-  --accent-deep: #8d3b24;
-  --accent-soft: #f7d5bf;
-  --green: #395f4d;
-  --green-soft: #dcebe2;
-  --yellow: #e7b841;
-  --shadow: 0 20px 70px rgba(79, 56, 32, 0.14);
+  --bg: #fff3e0;
+  --paper: rgba(255, 243, 224, 0.84);
+  --paper-strong: rgba(255, 243, 224, 0.96);
+  --ink: #3e2723;
+  --muted: #8d6e63;
+  --line: rgba(62, 39, 35, 0.12);
+  --accent: #d4a373;
+  --accent-deep: #3e2723;
+  --accent-soft: #ffe0b2;
+  --green: #6f5a4f;
+  --green-soft: #f4dfc1;
+  --yellow: #d4a373;
+  --shadow: 0 22px 72px rgba(62, 39, 35, 0.16);
   --radius-xl: 28px;
   --radius-lg: 22px;
   --radius-md: 16px;
@@ -48,8 +48,9 @@ body {
   font-family: "IBM Plex Sans", "Avenir Next", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(246, 196, 133, 0.4), transparent 28%),
-    linear-gradient(180deg, #f9f1e3 0%, #f2e8d8 40%, #efe8dc 100%);
+    radial-gradient(circle at top left, rgba(255, 224, 178, 0.34), transparent 30%),
+    radial-gradient(circle at top right, rgba(212, 163, 115, 0.14), transparent 32%),
+    linear-gradient(180deg, #fff8ee 0%, #fff1df 44%, #f8ecdc 100%);
 }
 
 button,
@@ -73,13 +74,63 @@ textarea {
 .orb-one {
   top: -8rem;
   right: -10rem;
-  background: rgba(221, 111, 63, 0.25);
+  background: rgba(212, 163, 115, 0.18);
 }
 
 .orb-two {
   bottom: -12rem;
   left: -12rem;
-  background: rgba(57, 95, 77, 0.18);
+  background: rgba(141, 110, 99, 0.12);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.welcome-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 224, 178, 0.92), transparent 30%),
+    radial-gradient(circle at 82% 12%, rgba(212, 163, 115, 0.36), transparent 34%),
+    linear-gradient(135deg, rgba(255, 243, 224, 0.92), rgba(255, 224, 178, 0.9));
+}
+
+.welcome-card {
+  width: min(820px, 100%);
+  padding: clamp(28px, 6vw, 64px);
+  border-radius: 38px;
+  background: rgba(255, 243, 224, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  box-shadow: 0 30px 100px rgba(62, 39, 35, 0.22);
+}
+
+.welcome-card h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-family: "Manrope", "IBM Plex Sans", sans-serif;
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+}
+
+.welcome-card p:not(.eyebrow) {
+  max-width: 58ch;
+  margin: 22px 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.welcome-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
 }
 
 .app-shell {
@@ -88,6 +139,168 @@ textarea {
   max-width: 1480px;
   margin: 0 auto;
   padding: 28px 20px 48px;
+}
+
+.profile-button {
+  position: fixed;
+  z-index: 12;
+  top: 22px;
+  right: 22px;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 18px 38px rgba(62, 39, 35, 0.26);
+  cursor: pointer;
+}
+
+.profile-button span::before,
+.profile-button span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-soft);
+}
+
+.profile-button span::before {
+  top: 13px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+
+.profile-button span::after {
+  bottom: 12px;
+  width: 25px;
+  height: 14px;
+  border-radius: 999px 999px 10px 10px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(62, 39, 35, 0.34);
+  backdrop-filter: blur(12px);
+}
+
+.profile-modal-card {
+  width: min(900px, 100%);
+  max-height: min(900px, 92vh);
+  overflow: auto;
+  padding: 24px;
+  border-radius: 30px;
+  background: var(--paper-strong);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 28px 90px rgba(62, 39, 35, 0.26);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.profile-target-preview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.profile-target-preview article {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(212, 163, 115, 0.16);
+}
+
+.profile-target-preview span,
+.profile-target-preview small {
+  display: block;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.profile-target-preview strong {
+  display: block;
+  margin: 6px 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.15rem;
+}
+
+.target-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 16px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.target-edit-row .tiny-button.active {
+  background: var(--ink);
+  color: var(--accent-soft);
+}
+
+.manual-target-editor {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(255, 224, 178, 0.28);
+}
+
+.manual-target-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.manual-target-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 243, 224, 0.7);
+}
+
+.manual-target-group strong {
+  grid-column: 1 / -1;
+  font-family: "Manrope", sans-serif;
+}
+
+.cycle-card {
+  margin-bottom: 18px;
+}
+
+.cycle-tips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.cycle-tips article {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 224, 178, 0.3);
+}
+
+.cycle-tips strong {
+  font-family: "Manrope", sans-serif;
+}
+
+.cycle-tips p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
 }
 
 .hero {
@@ -266,8 +479,8 @@ textarea {
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  border-color: rgba(221, 111, 63, 0.55);
-  box-shadow: 0 0 0 4px rgba(221, 111, 63, 0.12);
+  border-color: rgba(212, 163, 115, 0.68);
+  box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.16);
 }
 
 .field.compact input,
@@ -298,14 +511,14 @@ textarea {
 }
 
 .primary-button {
-  background: linear-gradient(135deg, var(--accent), #c45627);
-  color: white;
-  box-shadow: 0 12px 28px rgba(196, 86, 39, 0.24);
+  background: linear-gradient(135deg, var(--ink), #8d6e63);
+  color: #fff3e0;
+  box-shadow: 0 12px 28px rgba(62, 39, 35, 0.22);
 }
 
 .secondary-button {
-  background: rgba(57, 95, 77, 0.12);
-  color: var(--green);
+  background: rgba(141, 110, 99, 0.14);
+  color: var(--ink);
 }
 
 .ghost-button {
@@ -714,6 +927,26 @@ textarea {
     padding: 18px 14px 36px;
   }
 
+  .profile-button {
+    top: 14px;
+    right: 14px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .welcome-card {
+    padding: 28px 20px;
+  }
+
+  .welcome-actions,
+  .profile-grid,
+  .profile-target-preview,
+  .manual-target-grid,
+  .manual-target-group,
+  .cycle-tips {
+    grid-template-columns: 1fr;
+  }
+
   .hero,
   .card {
     padding: 18px;
@@ -734,7 +967,8 @@ textarea {
 
   .add-row,
   .search-panel,
-  .section-head {
+  .section-head,
+  .welcome-actions {
     flex-direction: column;
     align-items: stretch;
   }
@@ -754,27 +988,57 @@ textarea {
   <body>
     <div class="background-orb orb-one"></div>
     <div class="background-orb orb-two"></div>
+
+    <section class="welcome-screen" id="welcome-screen">
+      <div class="welcome-card">
+        <p class="eyebrow">Prime Era</p>
+        <h1>Добро пожаловать в твою prime-эру</h1>
+        <p>
+          Выбери профиль, настрой цель и собирай рацион, тренировки и прогресс
+          под себя. Каждый пользователь хранится отдельно.
+        </p>
+        <div class="welcome-actions">
+          <label class="field compact grow">
+            <span>Кто заходит</span>
+            <select id="welcome-account-select"></select>
+          </label>
+          <label class="field compact grow">
+            <span>Пароль</span>
+            <input type="password" id="welcome-password" placeholder="Если пароль задан" />
+          </label>
+          <button class="primary-button" id="enter-app">Войти</button>
+          <button class="secondary-button" id="welcome-create-account">
+            Новый профиль
+          </button>
+        </div>
+      </div>
+    </section>
+
     <div class="app-shell">
+      <button class="profile-button" id="profile-button" title="Профиль" aria-label="Открыть профиль">
+        <span></span>
+      </button>
+
       <header class="hero">
         <div>
-          <p class="eyebrow">Recomp Flow</p>
-          <h1>Трекер рациона и тренировок для рекомпозиции</h1>
+          <p class="eyebrow">Prime Era</p>
+          <h1>Трекер рациона и тренировок под твою цель</h1>
           <p class="hero-copy">
-            Завтрак, ужин и сладкое собираются как конструктор, прогресс
-            хранится отдельно по датам и пользователям, а тренировки
-            сохраняются в журнале по дням недели.
+            Завтрак, ужин и сладкое собираются как конструктор, параметры
+            профиля помогают подобрать норму КБЖУ, а тренировки и прогресс
+            хранятся отдельно для каждого пользователя.
           </p>
         </div>
         <div class="hero-panels">
           <article class="hero-panel">
             <span>Дни без тренировки</span>
-            <strong>1800 ккал</strong>
-            <small>125 Б / 65 Ж / 179 У</small>
+            <strong id="hero-rest-kcal">1800 ккал</strong>
+            <small id="hero-rest-macros">125 Б / 65 Ж / 179 У</small>
           </article>
           <article class="hero-panel accent">
             <span>Дни с тренировкой</span>
-            <strong>2000 ккал</strong>
-            <small>125 Б / 65 Ж / 229 У</small>
+            <strong id="hero-training-kcal">2000 ккал</strong>
+            <small id="hero-training-macros">125 Б / 65 Ж / 229 У</small>
           </article>
         </div>
       </header>
@@ -787,15 +1051,6 @@ textarea {
       </nav>
 
       <section class="card controls-card">
-        <div class="add-row">
-          <label class="field compact grow">
-            <span>Пользователь</span>
-            <select id="account-select"></select>
-          </label>
-          <button class="secondary-button" id="add-account">
-            Новый пользователь
-          </button>
-        </div>
         <div class="add-row transfer-row">
           <button class="ghost-button" id="export-data">
             Экспорт данных
@@ -864,6 +1119,7 @@ textarea {
 
           <section class="summary-grid" id="summary-cards"></section>
           <section class="summary-grid" id="intake-cards"></section>
+          <section class="card cycle-card hidden" id="cycle-section"></section>
           <section class="card" id="refill-section"></section>
 
           <section class="two-column">
@@ -1078,9 +1334,141 @@ textarea {
       </main>
     </div>
 
-    <template id="macro-pill-template">
+      <template id="macro-pill-template">
       <div class="macro-pill"></div>
     </template>
+
+    <div class="modal-backdrop hidden" id="profile-modal">
+      <section class="profile-modal-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Профиль</p>
+            <h2>Настройки пользователя</h2>
+          </div>
+          <button class="tiny-button" id="close-profile" title="Закрыть">×</button>
+        </div>
+
+        <div class="profile-grid">
+          <label class="field">
+            <span>Имя</span>
+            <input type="text" id="profile-name" />
+          </label>
+          <label class="field">
+            <span>Возраст</span>
+            <input type="number" id="profile-age" min="10" max="100" />
+          </label>
+          <label class="field">
+            <span>Пол</span>
+            <select id="profile-sex">
+              <option value="female">Женский</option>
+              <option value="male">Мужской</option>
+            </select>
+          </label>
+          <label class="field cycle-field" id="profile-period-field">
+            <span>Первый день последней менструации</span>
+            <input type="date" id="profile-last-period-start" />
+          </label>
+          <label class="field cycle-field" id="profile-cycle-length-field">
+            <span>Средняя длина цикла, дней</span>
+            <input type="number" id="profile-cycle-length" min="21" max="45" step="1" />
+          </label>
+          <label class="field">
+            <span>Рост, см</span>
+            <input type="number" id="profile-height" min="100" max="230" />
+          </label>
+          <label class="field">
+            <span>Вес, кг</span>
+            <input type="number" id="profile-weight" min="30" max="250" step="0.1" />
+          </label>
+          <label class="field">
+            <span>Активность за день</span>
+            <select id="profile-day-activity">
+              <option value="low">Мало шагов / сидячий день</option>
+              <option value="medium">Обычная активность</option>
+              <option value="high">Много движения</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Активность за неделю</span>
+            <select id="profile-week-activity">
+              <option value="low">0-2 тренировки</option>
+              <option value="medium">3-4 тренировки</option>
+              <option value="high">5+ тренировок</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Цель</span>
+            <select id="profile-goal">
+              <option value="fat-loss">Похудение</option>
+              <option value="muscle-gain">Набор веса</option>
+              <option value="maintenance">Поддержание веса</option>
+              <option value="recomposition">Рекомпозиция</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Пароль для входа</span>
+            <input type="password" id="profile-password" placeholder="Оставь пустым, если пароль не нужен" />
+          </label>
+        </div>
+
+        <div class="profile-target-preview" id="profile-target-preview"></div>
+        <div class="target-edit-row">
+          <button class="tiny-button" id="toggle-manual-targets" title="Настроить КБЖУ вручную">✎</button>
+          <span id="manual-target-label">Автоматическая рекомендация КБЖУ</span>
+        </div>
+        <div class="manual-target-editor hidden" id="manual-target-editor">
+          <p class="hint">Если включить ручную настройку, эти значения будут использоваться вместо автоматического расчета.</p>
+          <div class="manual-target-grid">
+            <div class="manual-target-group">
+              <strong>День без тренировки</strong>
+              <label class="field compact">
+                <span>Ккал</span>
+                <input type="number" id="manual-rest-kcal" min="1000" step="10" />
+              </label>
+              <label class="field compact">
+                <span>Белки</span>
+                <input type="number" id="manual-rest-protein" min="0" step="1" />
+              </label>
+              <label class="field compact">
+                <span>Жиры</span>
+                <input type="number" id="manual-rest-fat" min="0" step="1" />
+              </label>
+              <label class="field compact">
+                <span>Углеводы</span>
+                <input type="number" id="manual-rest-carbs" min="0" step="1" />
+              </label>
+            </div>
+            <div class="manual-target-group">
+              <strong>Тренировочный день</strong>
+              <label class="field compact">
+                <span>Ккал</span>
+                <input type="number" id="manual-training-kcal" min="1000" step="10" />
+              </label>
+              <label class="field compact">
+                <span>Белки</span>
+                <input type="number" id="manual-training-protein" min="0" step="1" />
+              </label>
+              <label class="field compact">
+                <span>Жиры</span>
+                <input type="number" id="manual-training-fat" min="0" step="1" />
+              </label>
+              <label class="field compact">
+                <span>Углеводы</span>
+                <input type="number" id="manual-training-carbs" min="0" step="1" />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="saved-actions">
+          <button class="primary-button" id="save-profile">Сохранить профиль</button>
+          <button class="secondary-button" id="profile-create-account">Добавить пользователя</button>
+          <button class="ghost-button" id="switch-profile">Сменить пользователя</button>
+          <button class="ghost-button danger-button" id="logout-profile">Выйти</button>
+          <button class="ghost-button danger-button" id="delete-account">Удалить аккаунт</button>
+        </div>
+      </section>
+    </div>
 
     <script>
 const STORAGE_KEY = "recomp-flow-state-v1";
@@ -1089,6 +1477,46 @@ const TARGETS = {
   rest: { id: "rest", label: "День без тренировки", kcal: 1800, protein: 125, fat: 65, carbs: 178.8 },
   training: { id: "training", label: "Тренировочный день", kcal: 2000, protein: 125, fat: 65, carbs: 228.8 },
 };
+
+const GOAL_LABELS = {
+  "fat-loss": "Похудение",
+  "muscle-gain": "Набор веса",
+  maintenance: "Поддержание веса",
+  recomposition: "Рекомпозиция",
+};
+
+const BASIC_CUSTOM_FOODS = [
+  { id: "base-cucumber", name: "Огурец", category: "both", kcal: 15, protein: 0.8, fat: 0.1, carbs: 3.6 },
+  { id: "base-tomato", name: "Помидор", category: "both", kcal: 18, protein: 0.9, fat: 0.2, carbs: 3.9 },
+  { id: "base-lettuce", name: "Листовой салат", category: "both", kcal: 15, protein: 1.4, fat: 0.2, carbs: 2.9 },
+  { id: "base-broccoli", name: "Брокколи", category: "dinner", kcal: 35, protein: 2.4, fat: 0.4, carbs: 7.2 },
+  { id: "base-banana", name: "Банан", category: "breakfast", kcal: 89, protein: 1.1, fat: 0.3, carbs: 22.8 },
+  { id: "base-apple", name: "Яблоко", category: "breakfast", kcal: 52, protein: 0.3, fat: 0.2, carbs: 13.8 },
+  { id: "base-berries", name: "Ягоды", category: "breakfast", kcal: 50, protein: 0.8, fat: 0.3, carbs: 11.5 },
+  { id: "base-buckwheat", name: "Гречка вареная", category: "dinner", kcal: 110, protein: 4.2, fat: 1.1, carbs: 21.6 },
+  { id: "base-rice", name: "Рис вареный", category: "dinner", kcal: 130, protein: 2.7, fat: 0.3, carbs: 28.2 },
+  { id: "base-oatmeal", name: "Овсяная каша на воде", category: "breakfast", kcal: 88, protein: 3, fat: 1.7, carbs: 15 },
+  { id: "base-potato", name: "Картофель запеченный", category: "dinner", kcal: 93, protein: 2.5, fat: 0.1, carbs: 21 },
+  { id: "base-chicken-breast", name: "Куриная грудка запеченная", category: "dinner", kcal: 165, protein: 31, fat: 3.6, carbs: 0 },
+  { id: "base-chicken-thigh", name: "Куриное бедро запеченное", category: "dinner", kcal: 209, protein: 26, fat: 11, carbs: 0 },
+  { id: "base-turkey", name: "Индейка запеченная", category: "dinner", kcal: 135, protein: 29, fat: 2.5, carbs: 0 },
+  { id: "base-beef", name: "Говядина постная", category: "dinner", kcal: 187, protein: 28, fat: 8, carbs: 0 },
+  { id: "base-salmon", name: "Лосось запеченный", category: "dinner", kcal: 208, protein: 22, fat: 13, carbs: 0 },
+  { id: "base-cod", name: "Треска запеченная", category: "dinner", kcal: 105, protein: 23, fat: 0.9, carbs: 0 },
+  { id: "base-shrimp", name: "Креветки", category: "dinner", kcal: 99, protein: 24, fat: 0.3, carbs: 0.2 },
+  { id: "base-olive-oil", name: "Оливковое масло", category: "both", kcal: 884, protein: 0, fat: 100, carbs: 0 },
+  { id: "base-avocado-oil", name: "Авокадо-масло", category: "both", kcal: 884, protein: 0, fat: 100, carbs: 0 },
+  { id: "base-soft-curd", name: "Мягкий творог", category: "breakfast", kcal: 76, protein: 15, fat: 0.4, carbs: 2.5 },
+  { id: "base-greek-yogurt", name: "Греческий йогурт 2%", category: "breakfast", kcal: 73, protein: 10, fat: 2, carbs: 3.6 },
+  { id: "base-milk", name: "Молоко 2.5%", category: "breakfast", kcal: 52, protein: 2.8, fat: 2.5, carbs: 4.7 },
+  { id: "base-cottage-cheese", name: "Творог 5%", category: "breakfast", kcal: 121, protein: 17, fat: 5, carbs: 1.8 },
+].map((food) => ({
+  ...food,
+  defaultGrams: 100,
+  unit: "г",
+  note: "Базовый продукт",
+  isBase: true,
+}));
 
 const FOODS = {
   coffeeMilk: {
@@ -1525,13 +1953,53 @@ const DEFAULT_WORKOUT_TEMPLATE = {
 const state = migrateState(loadState());
 
 const elements = {
+  welcomeScreen: document.getElementById("welcome-screen"),
+  welcomeAccountSelect: document.getElementById("welcome-account-select"),
+  welcomePassword: document.getElementById("welcome-password"),
+  enterApp: document.getElementById("enter-app"),
+  welcomeCreateAccount: document.getElementById("welcome-create-account"),
+  profileButton: document.getElementById("profile-button"),
+  profileModal: document.getElementById("profile-modal"),
+  closeProfile: document.getElementById("close-profile"),
+  profileName: document.getElementById("profile-name"),
+  profileAge: document.getElementById("profile-age"),
+  profileSex: document.getElementById("profile-sex"),
+  profileLastPeriodStart: document.getElementById("profile-last-period-start"),
+  profileCycleLength: document.getElementById("profile-cycle-length"),
+  profilePeriodField: document.getElementById("profile-period-field"),
+  profileCycleLengthField: document.getElementById("profile-cycle-length-field"),
+  profileHeight: document.getElementById("profile-height"),
+  profileWeight: document.getElementById("profile-weight"),
+  profileDayActivity: document.getElementById("profile-day-activity"),
+  profileWeekActivity: document.getElementById("profile-week-activity"),
+  profileGoal: document.getElementById("profile-goal"),
+  profilePassword: document.getElementById("profile-password"),
+  profileTargetPreview: document.getElementById("profile-target-preview"),
+  toggleManualTargets: document.getElementById("toggle-manual-targets"),
+  manualTargetLabel: document.getElementById("manual-target-label"),
+  manualTargetEditor: document.getElementById("manual-target-editor"),
+  manualRestKcal: document.getElementById("manual-rest-kcal"),
+  manualRestProtein: document.getElementById("manual-rest-protein"),
+  manualRestFat: document.getElementById("manual-rest-fat"),
+  manualRestCarbs: document.getElementById("manual-rest-carbs"),
+  manualTrainingKcal: document.getElementById("manual-training-kcal"),
+  manualTrainingProtein: document.getElementById("manual-training-protein"),
+  manualTrainingFat: document.getElementById("manual-training-fat"),
+  manualTrainingCarbs: document.getElementById("manual-training-carbs"),
+  saveProfile: document.getElementById("save-profile"),
+  profileCreateAccount: document.getElementById("profile-create-account"),
+  switchProfile: document.getElementById("switch-profile"),
+  logoutProfile: document.getElementById("logout-profile"),
+  deleteAccount: document.getElementById("delete-account"),
+  heroRestKcal: document.getElementById("hero-rest-kcal"),
+  heroRestMacros: document.getElementById("hero-rest-macros"),
+  heroTrainingKcal: document.getElementById("hero-training-kcal"),
+  heroTrainingMacros: document.getElementById("hero-training-macros"),
   tabButtons: document.querySelectorAll(".tab-button"),
   panels: {
     nutrition: document.getElementById("nutrition-panel"),
     workouts: document.getElementById("workouts-panel"),
   },
-  accountSelect: document.getElementById("account-select"),
-  addAccount: document.getElementById("add-account"),
   exportData: document.getElementById("export-data"),
   importData: document.getElementById("import-data"),
   importDataFile: document.getElementById("import-data-file"),
@@ -1548,6 +2016,7 @@ const elements = {
   dayHint: document.getElementById("day-hint"),
   summaryCards: document.getElementById("summary-cards"),
   intakeCards: document.getElementById("intake-cards"),
+  cycleSection: document.getElementById("cycle-section"),
   refillSection: document.getElementById("refill-section"),
   breakfastIdeas: document.getElementById("breakfast-ideas"),
   breakfastDefaults: document.getElementById("breakfast-defaults"),
@@ -1633,14 +2102,37 @@ function migrateState(rawState) {
     type: legacyWorkouts.type || autoWorkoutTypeForDate(workoutDate),
     exercises: deepClone(legacyWorkouts.exercises || []),
     notes: legacyWorkouts.notes || "",
+    editingLogCreatedAt: null,
   };
 
   return migrated;
 }
 
-function createEmptyAccountData() {
+function createDefaultProfileSettings(name = "Я") {
   return {
-    customFoods: [],
+    name,
+    age: "",
+    sex: "female",
+    lastPeriodStart: "",
+    cycleLength: 28,
+    height: "",
+    weight: "",
+    dayActivity: "medium",
+    weekActivity: "medium",
+    goal: "recomposition",
+    password: "",
+    manualTargetsEnabled: false,
+    manualTargets: {
+      rest: { kcal: "", protein: "", fat: "", carbs: "" },
+      training: { kcal: "", protein: "", fat: "", carbs: "" },
+    },
+  };
+}
+
+function createEmptyAccountData(name = "Я") {
+  return {
+    profileSettings: createDefaultProfileSettings(name),
+    customFoods: deepClone(BASIC_CUSTOM_FOODS),
     savedDays: [],
     showDessertLibrary: false,
     nutritionByDate: {},
@@ -1669,6 +2161,7 @@ function createDefaultWorkoutState(date) {
     type,
     exercises: deepClone(DEFAULT_WORKOUT_TEMPLATE[type] || []),
     notes: "",
+    editingLogCreatedAt: null,
   };
 }
 
@@ -1686,18 +2179,34 @@ function hydrateDefaults() {
   state.accountData = state.accountData || {};
   state.accounts.forEach((account) => {
     state.accountData[account.id] = {
-      ...createEmptyAccountData(),
+      ...createEmptyAccountData(account.name),
       ...(state.accountData[account.id] || {}),
     };
+    state.accountData[account.id].profileSettings = {
+      ...createDefaultProfileSettings(account.name),
+      ...(state.accountData[account.id].profileSettings || {}),
+    };
+    ensureBasicFoods(state.accountData[account.id]);
   });
+  state.hasEnteredApp = !!state.hasEnteredApp;
   state.profile = state.profile || {};
   loadActiveAccountContext(state.nutrition?.date || today, state.workouts?.date || today);
   sanitizeNutritionState();
 }
 
+function ensureBasicFoods(accountData) {
+  accountData.customFoods = accountData.customFoods || [];
+  const existingIds = new Set(accountData.customFoods.map((food) => food.id));
+  BASIC_CUSTOM_FOODS.forEach((food) => {
+    if (!existingIds.has(food.id)) {
+      accountData.customFoods.push(deepClone(food));
+    }
+  });
+}
+
 function renderStaticOptions() {
-  elements.accountSelect.innerHTML = state.accounts
-    .map((account) => `<option value="${account.id}">${account.name}</option>`)
+  elements.welcomeAccountSelect.innerHTML = state.accounts
+    .map((account) => `<option value="${account.id}">${getAccountDisplayName(account.id)}</option>`)
     .join("");
   elements.dessertSelect.innerHTML = DESSERT_PRESETS.map(
     (preset) => `<option value="${preset.id}">${preset.label}</option>`
@@ -1709,18 +2218,92 @@ function renderStaticOptions() {
 }
 
 function bindEvents() {
+  elements.enterApp.addEventListener("click", () => {
+    const accountId = elements.welcomeAccountSelect.value;
+    if (!accountId) return;
+    const loginResult = validateLogin(accountId, elements.welcomePassword.value);
+    if (!loginResult.ok) {
+      window.alert(loginResult.message);
+      return;
+    }
+    switchAccount(accountId);
+    elements.welcomePassword.value = "";
+    state.hasEnteredApp = true;
+    saveState();
+    renderAll();
+  });
+
+  elements.welcomeCreateAccount.addEventListener("click", () => {
+    if (!createAccountFromPrompt()) return;
+    state.hasEnteredApp = true;
+    saveState();
+    openProfileModal();
+  });
+
+  elements.profileButton.addEventListener("click", openProfileModal);
+  elements.closeProfile.addEventListener("click", closeProfileModal);
+  elements.profileModal.addEventListener("click", (event) => {
+    if (event.target === elements.profileModal) {
+      closeProfileModal();
+    }
+  });
+  elements.toggleManualTargets.addEventListener("click", () => {
+    const settings = getProfileSettings();
+    const nextEnabled = !settings.manualTargetsEnabled;
+    if (nextEnabled) {
+      const restAuto = computeAutoTargets("rest", settings);
+      const trainingAuto = computeAutoTargets("training", settings);
+      settings.manualTargets = {
+        rest: normalizeManualTarget(settings.manualTargets?.rest, restAuto),
+        training: normalizeManualTarget(settings.manualTargets?.training, trainingAuto),
+      };
+    }
+    settings.manualTargetsEnabled = nextEnabled;
+    state.profile.settings = settings;
+    saveState();
+    renderAll();
+    openProfileModal();
+  });
+  elements.saveProfile.addEventListener("click", saveProfileSettings);
+  elements.profileCreateAccount.addEventListener("click", () => {
+    createAccountFromPrompt();
+    openProfileModal();
+  });
+  elements.switchProfile.addEventListener("click", () => {
+    closeProfileModal();
+    showLoginScreen();
+  });
+  elements.logoutProfile.addEventListener("click", () => {
+    closeProfileModal();
+    showLoginScreen();
+  });
+  elements.deleteAccount.addEventListener("click", deleteActiveAccount);
+  elements.profileSex.addEventListener("change", () => {
+    const showCycleFields = elements.profileSex.value === "female";
+    elements.profilePeriodField.classList.toggle("hidden", !showCycleFields);
+    elements.profileCycleLengthField.classList.toggle("hidden", !showCycleFields);
+  });
+
+  [
+    ["rest", elements.manualRestKcal, "kcal"],
+    ["rest", elements.manualRestProtein, "protein"],
+    ["rest", elements.manualRestFat, "fat"],
+    ["rest", elements.manualRestCarbs, "carbs"],
+    ["training", elements.manualTrainingKcal, "kcal"],
+    ["training", elements.manualTrainingProtein, "protein"],
+    ["training", elements.manualTrainingFat, "fat"],
+    ["training", elements.manualTrainingCarbs, "carbs"],
+  ].forEach(([dayType, input, changedField]) => {
+    input.addEventListener("input", () => {
+      rebalanceManualTarget(dayType, changedField);
+      persistManualTargetsFromInputs();
+      updateProfileTargetPreview();
+      renderNutritionSection();
+    });
+  });
+
   elements.tabButtons.forEach((button) => {
     button.addEventListener("click", () => switchTab(button.dataset.tab));
-  });
-
-  elements.accountSelect.addEventListener("change", (event) => {
-    switchAccount(event.target.value);
-  });
-
-  elements.addAccount.addEventListener("click", () => {
-    const name = window.prompt("Имя пользователя");
-    if (!name || !name.trim()) return;
-    createAccount(name.trim());
   });
 
   elements.exportData.addEventListener("click", exportDataSnapshot);
@@ -1859,7 +2442,8 @@ function bindEvents() {
 
 function getActiveAccountData() {
   if (!state.accountData[state.activeAccountId]) {
-    state.accountData[state.activeAccountId] = createEmptyAccountData();
+    const account = state.accounts.find((item) => item.id === state.activeAccountId);
+    state.accountData[state.activeAccountId] = createEmptyAccountData(account?.name || "Я");
   }
   return state.accountData[state.activeAccountId];
 }
@@ -1871,6 +2455,10 @@ function loadActiveAccountContext(nutritionDate, workoutDate) {
   const resolvedWorkoutDate = workoutDate || today;
 
   state.profile = {
+    settings: {
+      ...createDefaultProfileSettings(state.accounts.find((item) => item.id === state.activeAccountId)?.name || "Я"),
+      ...(accountData.profileSettings || {}),
+    },
     customFoods: deepClone(accountData.customFoods || []),
     savedDays: deepClone(accountData.savedDays || []),
     showDessertLibrary: accountData.showDessertLibrary || false,
@@ -1929,11 +2517,71 @@ function switchAccount(accountId) {
   renderAll();
 }
 
+function validateLogin(accountId, password) {
+  const savedPassword = state.accountData?.[accountId]?.profileSettings?.password || "";
+  const typedPassword = password.trim();
+  if (!savedPassword) {
+    if (typedPassword) {
+      state.accountData[accountId].profileSettings.password = typedPassword;
+      return { ok: true };
+    }
+
+    return {
+      ok: false,
+      message: "У этого профиля пока нет пароля. Введи новый пароль, и он сохранится для следующих входов.",
+    };
+  }
+
+  if (typedPassword !== savedPassword) {
+    return { ok: false, message: "Пароль неверный." };
+  }
+
+  return { ok: true };
+}
+
+function showLoginScreen() {
+  state.hasEnteredApp = false;
+  elements.welcomePassword.value = "";
+  saveState();
+  renderAll();
+}
+
+function deleteActiveAccount() {
+  const currentName = getAccountDisplayName(state.activeAccountId);
+  const confirmed = window.confirm(`Удалить аккаунт "${currentName}" со всеми продуктами, рационом и тренировками?`);
+  if (!confirmed) return;
+
+  const accountId = state.activeAccountId;
+  state.accounts = state.accounts.filter((account) => account.id !== accountId);
+  delete state.accountData[accountId];
+
+  if (!state.accounts.length) {
+    const id = `account-${cryptoRandomId()}`;
+    state.accounts.push({ id, name: "Я" });
+    state.accountData[id] = createEmptyAccountData("Я");
+  }
+
+  state.activeAccountId = state.accounts[0].id;
+  loadActiveAccountContext(formatDateISO(new Date()), formatDateISO(new Date()));
+  state.hasEnteredApp = false;
+  closeProfileModal();
+  saveState();
+  renderStaticOptions();
+  renderAll();
+}
+
+function createAccountFromPrompt() {
+  const name = window.prompt("Имя пользователя");
+  if (!name || !name.trim()) return false;
+  createAccount(name.trim());
+  return true;
+}
+
 function createAccount(name) {
   saveState();
   const id = `account-${cryptoRandomId()}`;
   state.accounts.push({ id, name });
-  state.accountData[id] = createEmptyAccountData();
+  state.accountData[id] = createEmptyAccountData(name);
   state.activeAccountId = id;
   loadActiveAccountContext(state.nutrition.date, state.workouts.date);
   saveState();
@@ -1941,9 +2589,134 @@ function createAccount(name) {
   renderAll();
 }
 
+function getAccountDisplayName(accountId) {
+  const account = state.accounts.find((item) => item.id === accountId);
+  return state.accountData?.[accountId]?.profileSettings?.name || account?.name || "Пользователь";
+}
+
 function renderAll() {
+  renderProfileShell();
   renderNutritionSection();
   renderWorkoutSection();
+}
+
+function renderProfileShell() {
+  const isWelcomeVisible = !state.hasEnteredApp;
+  elements.welcomeScreen.classList.toggle("hidden", !isWelcomeVisible);
+  elements.welcomeAccountSelect.value = state.activeAccountId;
+  const restTarget = getUserTargets("rest");
+  const trainingTarget = getUserTargets("training");
+  elements.heroRestKcal.textContent = `${restTarget.kcal} ккал`;
+  elements.heroRestMacros.textContent = `${round(restTarget.protein)} Б / ${round(restTarget.fat)} Ж / ${round(restTarget.carbs)} У`;
+  elements.heroTrainingKcal.textContent = `${trainingTarget.kcal} ккал`;
+  elements.heroTrainingMacros.textContent = `${round(trainingTarget.protein)} Б / ${round(trainingTarget.fat)} Ж / ${round(trainingTarget.carbs)} У`;
+  renderProfileForm();
+}
+
+function openProfileModal() {
+  renderProfileForm();
+  elements.profileModal.classList.remove("hidden");
+}
+
+function closeProfileModal() {
+  elements.profileModal.classList.add("hidden");
+}
+
+function renderProfileForm() {
+  const settings = getProfileSettings();
+  elements.profileName.value = settings.name || "";
+  elements.profileAge.value = settings.age || "";
+  elements.profileSex.value = settings.sex || "female";
+  elements.profileLastPeriodStart.value = settings.lastPeriodStart || "";
+  elements.profileCycleLength.value = settings.cycleLength || 28;
+  const showCycleFields = settings.sex === "female";
+  elements.profilePeriodField.classList.toggle("hidden", !showCycleFields);
+  elements.profileCycleLengthField.classList.toggle("hidden", !showCycleFields);
+  elements.profileHeight.value = settings.height || "";
+  elements.profileWeight.value = settings.weight || "";
+  elements.profileDayActivity.value = settings.dayActivity || "medium";
+  elements.profileWeekActivity.value = settings.weekActivity || "medium";
+  elements.profileGoal.value = settings.goal || "recomposition";
+  elements.profilePassword.value = settings.password || "";
+  elements.manualTargetEditor.classList.toggle("hidden", !settings.manualTargetsEnabled);
+  elements.manualTargetLabel.textContent = settings.manualTargetsEnabled
+    ? "Ручная настройка КБЖУ включена"
+    : "Автоматическая рекомендация КБЖУ";
+  elements.toggleManualTargets.classList.toggle("active", !!settings.manualTargetsEnabled);
+
+  const restAuto = computeAutoTargets("rest", settings);
+  const trainingAuto = computeAutoTargets("training", settings);
+  const manualTargets = {
+    rest: normalizeManualTarget(settings.manualTargets?.rest, restAuto),
+    training: normalizeManualTarget(settings.manualTargets?.training, trainingAuto),
+  };
+  elements.manualRestKcal.value = manualTargets.rest.kcal;
+  elements.manualRestProtein.value = manualTargets.rest.protein;
+  elements.manualRestFat.value = manualTargets.rest.fat;
+  elements.manualRestCarbs.value = manualTargets.rest.carbs;
+  elements.manualTrainingKcal.value = manualTargets.training.kcal;
+  elements.manualTrainingProtein.value = manualTargets.training.protein;
+  elements.manualTrainingFat.value = manualTargets.training.fat;
+  elements.manualTrainingCarbs.value = manualTargets.training.carbs;
+  updateProfileTargetPreview();
+}
+
+function updateProfileTargetPreview() {
+  const settings = getProfileSettingsFromForm();
+  const restTarget = getUserTargets("rest", settings);
+  const trainingTarget = getUserTargets("training", settings);
+  elements.profileTargetPreview.innerHTML = `
+    <article>
+      <span>Цель</span>
+      <strong>${GOAL_LABELS[settings.goal] || "Рекомпозиция"}</strong>
+      <small>${settings.manualTargetsEnabled ? "ручная коррекция" : "авторасчет"}</small>
+    </article>
+    <article>
+      <span>Без тренировки</span>
+      <strong>${restTarget.kcal} ккал</strong>
+      <small>${round(restTarget.protein)} Б / ${round(restTarget.fat)} Ж / ${round(restTarget.carbs)} У</small>
+    </article>
+    <article>
+      <span>Тренировка</span>
+      <strong>${trainingTarget.kcal} ккал</strong>
+      <small>${round(trainingTarget.protein)} Б / ${round(trainingTarget.fat)} Ж / ${round(trainingTarget.carbs)} У</small>
+    </article>
+  `;
+}
+
+function saveProfileSettings() {
+  const settings = getProfileSettingsFromForm();
+
+  const account = state.accounts.find((item) => item.id === state.activeAccountId);
+  if (account) {
+    account.name = settings.name;
+  }
+  state.profile.settings = settings;
+  saveState();
+  renderStaticOptions();
+  renderAll();
+  closeProfileModal();
+}
+
+function getProfileSettingsFromForm() {
+  return {
+    name: elements.profileName.value.trim() || "Пользователь",
+    age: toNumber(elements.profileAge.value, 0) || "",
+    sex: elements.profileSex.value,
+    lastPeriodStart: elements.profileLastPeriodStart.value,
+    cycleLength: clamp(toNumber(elements.profileCycleLength.value, 28), 21, 45),
+    height: toNumber(elements.profileHeight.value, 0) || "",
+    weight: toNumber(elements.profileWeight.value, 0) || "",
+    dayActivity: elements.profileDayActivity.value,
+    weekActivity: elements.profileWeekActivity.value,
+    goal: elements.profileGoal.value,
+    password: elements.profilePassword.value.trim(),
+    manualTargetsEnabled: getProfileSettings().manualTargetsEnabled,
+    manualTargets: {
+      rest: readManualTarget("rest"),
+      training: readManualTarget("training"),
+    },
+  };
 }
 
 function exportDataSnapshot() {
@@ -1974,6 +2747,7 @@ async function importDataSnapshot(file) {
     replaceState(imported);
     hydrateDefaults();
     saveState();
+    renderStaticOptions();
     renderAll();
     elements.transferHint.textContent = "Импорт завершен. Все данные из файла загружены на это устройство.";
   } catch (error) {
@@ -1991,7 +2765,6 @@ function replaceState(nextState) {
 
 function renderNutritionSection() {
   const summary = computeNutritionSummary();
-  elements.accountSelect.value = state.activeAccountId;
   elements.planDate.value = state.nutrition.date;
   elements.dayMode.value = state.nutrition.dayMode;
   elements.dessertSelect.value = state.nutrition.dessertPresetId;
@@ -2007,6 +2780,7 @@ function renderNutritionSection() {
   elements.dayHint.textContent = summary.dayHint;
   renderSummaryCards(summary);
   renderIntakeCards(summary);
+  renderCycleSection(summary);
   renderRefillSection(summary);
   renderBreakfastIdeas();
   renderBreakfastDefaults(summary);
@@ -2021,10 +2795,12 @@ function renderNutritionSection() {
 
 function renderWorkoutSection() {
   const currentType = state.workouts.type;
-  elements.accountSelect.value = state.activeAccountId;
   elements.workoutDate.value = state.workouts.date;
   elements.workoutType.value = currentType;
   elements.workoutNotes.value = state.workouts.notes;
+  elements.saveWorkout.textContent = state.workouts.editingLogCreatedAt
+    ? "Сохранить изменения"
+    : "Сохранить тренировку";
   renderWorkoutSummary();
   renderWeeklySchedule();
   renderExerciseSelect();
@@ -2074,6 +2850,45 @@ function renderSummaryCards(summary) {
       `
     )
     .join("");
+}
+
+function renderCycleSection(summary) {
+  const cycleInfo = getCycleInfo(getProfileSettings(), state.nutrition.date);
+  if (!cycleInfo) {
+    elements.cycleSection.classList.add("hidden");
+    elements.cycleSection.innerHTML = "";
+    return;
+  }
+
+  elements.cycleSection.classList.remove("hidden");
+  const adjustmentText = cycleInfo.adjustmentKcal
+    ? `Сегодня норма мягко скорректирована: +${cycleInfo.adjustmentKcal} ккал, жиры +${cycleInfo.fatDelta} г, углеводы пересчитаны остатком.`
+    : "Сегодня без дополнительной калорийной корректировки.";
+  elements.cycleSection.innerHTML = `
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Цикл</p>
+        <h2>${cycleInfo.title}, день ${cycleInfo.cycleDay}</h2>
+      </div>
+    </div>
+    <div class="macro-line">
+      ${pillHtml(`${summary.target.kcal} ккал`)}
+      ${pillHtml(`${round(summary.target.protein)} Б`)}
+      ${pillHtml(`${round(summary.target.fat)} Ж`)}
+      ${pillHtml(`${round(summary.target.carbs)} У`)}
+    </div>
+    <p class="hint">${adjustmentText}</p>
+    <div class="cycle-tips">
+      <article>
+        <strong>Нагрузка</strong>
+        <p>${cycleInfo.loadTip}</p>
+      </article>
+      <article>
+        <strong>Питание</strong>
+        <p>${cycleInfo.foodTip}</p>
+      </article>
+    </div>
+  `;
 }
 
 function renderIntakeCards(summary) {
@@ -2563,7 +3378,7 @@ function renderCustomLibrary() {
           <div class="saved-actions">
             ${["breakfast", "both"].includes(food.category) ? `<button class="secondary-button" data-add-custom-breakfast="${food.id}">В завтрак</button>` : ""}
             ${["dinner", "both"].includes(food.category) ? `<button class="secondary-button" data-add-custom-dinner="${food.id}">В ужин</button>` : ""}
-            <button class="ghost-button danger-button" data-remove-custom="${index}">Удалить</button>
+            ${food.isBase ? `<span class="badge">база</span>` : `<button class="ghost-button danger-button" data-remove-custom="${index}">Удалить</button>`}
           </div>
         </article>
       `
@@ -2857,7 +3672,10 @@ function renderExerciseList() {
 }
 
 function renderWorkoutHistory() {
-  const logs = [...(state.profile.workoutLogs || [])].sort((a, b) => b.date.localeCompare(a.date));
+  const logs = [...(state.profile.workoutLogs || [])].sort((a, b) => {
+    const dateDiff = b.date.localeCompare(a.date);
+    return dateDiff || ((b.createdAt || 0) - (a.createdAt || 0));
+  });
   if (!logs.length) {
     elements.workoutHistory.innerHTML = `<div class="empty-state">Сохрани первую тренировку, и история появится здесь.</div>`;
     return;
@@ -2878,6 +3696,7 @@ function renderWorkoutHistory() {
           </div>
           ${log.notes ? `<p>${log.notes}</p>` : ""}
           <div class="saved-actions">
+            <button class="tiny-button" title="Редактировать" data-edit-workout="${index}">✎</button>
             <button class="ghost-button danger-button" data-remove-workout="${index}">Удалить</button>
           </div>
         </article>
@@ -2885,9 +3704,37 @@ function renderWorkoutHistory() {
     )
     .join("");
 
+  elements.workoutHistory.querySelectorAll("[data-edit-workout]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const sortedLogs = [...(state.profile.workoutLogs || [])].sort((a, b) => {
+        const dateDiff = b.date.localeCompare(a.date);
+        return dateDiff || ((b.createdAt || 0) - (a.createdAt || 0));
+      });
+      const logToEdit = sortedLogs[Number(button.dataset.editWorkout)];
+      if (!logToEdit) return;
+
+      state.workouts = buildWorkoutState(
+        {
+          date: logToEdit.date,
+          type: logToEdit.type,
+          exercises: deepClone(logToEdit.exercises || []),
+          notes: logToEdit.notes || "",
+          editingLogCreatedAt: logToEdit.createdAt,
+        },
+        logToEdit.date
+      );
+      switchTab("workouts");
+      saveState();
+      renderAll();
+    });
+  });
+
   elements.workoutHistory.querySelectorAll("[data-remove-workout]").forEach((button) => {
     button.addEventListener("click", () => {
-      const sortedLogs = [...(state.profile.workoutLogs || [])].sort((a, b) => b.date.localeCompare(a.date));
+      const sortedLogs = [...(state.profile.workoutLogs || [])].sort((a, b) => {
+        const dateDiff = b.date.localeCompare(a.date);
+        return dateDiff || ((b.createdAt || 0) - (a.createdAt || 0));
+      });
       const logToRemove = sortedLogs[Number(button.dataset.removeWorkout)];
       state.profile.workoutLogs = state.profile.workoutLogs.filter((log) => !(log.date === logToRemove.date && log.createdAt === logToRemove.createdAt));
       saveState();
@@ -2904,9 +3751,206 @@ function switchTab(tab) {
   elements.panels.workouts.classList.toggle("active", tab === "workouts");
 }
 
+function getProfileSettings() {
+  const account = state.accounts.find((item) => item.id === state.activeAccountId);
+  return {
+    ...createDefaultProfileSettings(account?.name || "Я"),
+    ...(state.profile?.settings || {}),
+  };
+}
+
+function getUserTargets(dayType, overrideSettings) {
+  const settings = overrideSettings || getProfileSettings();
+  const manualTarget = settings.manualTargetsEnabled ? buildManualTarget(dayType, settings.manualTargets?.[dayType]) : null;
+  const baseTarget = manualTarget || computeAutoTargets(dayType, settings);
+  return applyCycleAdjustment(baseTarget, settings, state.nutrition?.date || formatDateISO(new Date()));
+}
+
+function computeAutoTargets(dayType, settings) {
+  const age = toNumber(settings.age, 0);
+  const height = toNumber(settings.height, 0);
+  const weight = toNumber(settings.weight, 0);
+
+  if (!age || !height || !weight) {
+    return TARGETS[dayType];
+  }
+
+  const sexOffset = settings.sex === "male" ? 5 : -161;
+  const bmr = 10 * weight + 6.25 * height - 5 * age + sexOffset;
+  const dayMultipliers = { low: 1.25, medium: 1.38, high: 1.52 };
+  const weekAdditions = { low: 0, medium: 0.07, high: 0.14 };
+  const activityMultiplier = (dayMultipliers[settings.dayActivity] || 1.38) + (weekAdditions[settings.weekActivity] || 0.07);
+  const maintenance = bmr * activityMultiplier;
+  const trainingBonus = dayType === "training" ? Math.max(120, weight * 2.2) : 0;
+  const goalModifiers = {
+    "fat-loss": -0.15,
+    "muscle-gain": 0.1,
+    maintenance: 0,
+    recomposition: dayType === "training" ? 0.03 : -0.07,
+  };
+  const goalModifier = goalModifiers[settings.goal] ?? goalModifiers.recomposition;
+  const kcal = Math.max(1200, roundToNearest((maintenance + trainingBonus) * (1 + goalModifier), 25));
+  const proteinMultiplier = settings.goal === "muscle-gain" || settings.goal === "recomposition" ? 1.8 : 1.6;
+  const protein = roundToNearest(Math.max(70, weight * proteinMultiplier), 5);
+  const fat = roundToNearest(Math.max(45, weight * 0.8), 5);
+  const carbs = Math.max(0, (kcal - protein * 4 - fat * 9) / 4);
+
+  return {
+    id: dayType,
+    label: TARGETS[dayType].label,
+    kcal,
+    protein,
+    fat,
+    carbs,
+  };
+}
+
+function buildManualTarget(dayType, target) {
+  if (!target) return null;
+  const kcal = toNumber(target.kcal, 0);
+  const protein = toNumber(target.protein, 0);
+  const fat = toNumber(target.fat, 0);
+  const carbs = toNumber(target.carbs, 0);
+  if (!kcal || !protein || !fat && fat !== 0 || !carbs && carbs !== 0) {
+    return null;
+  }
+
+  return {
+    id: dayType,
+    label: TARGETS[dayType].label,
+    kcal,
+    protein,
+    fat,
+    carbs,
+  };
+}
+
+function getCycleInfo(settings = getProfileSettings(), dateIso = state.nutrition?.date || formatDateISO(new Date())) {
+  if (settings.sex !== "female" || !settings.lastPeriodStart) return null;
+  const cycleLength = clamp(toNumber(settings.cycleLength, 28), 21, 45);
+  const currentDate = new Date(`${dateIso}T00:00:00`);
+  const startDate = new Date(`${settings.lastPeriodStart}T00:00:00`);
+  if (Number.isNaN(currentDate.getTime()) || Number.isNaN(startDate.getTime())) return null;
+
+  const diffDays = Math.floor((currentDate - startDate) / 86400000);
+  if (diffDays < 0) return null;
+
+  const cycleDay = (diffDays % cycleLength) + 1;
+  if (cycleDay <= 5) {
+    return {
+      cycleDay,
+      phase: "menstrual",
+      title: "Менструальная фаза",
+      adjustmentKcal: 0,
+      fatDelta: 0,
+      loadTip: "Силы могут быть ниже: оставь технику, легкую/среднюю нагрузку и больше восстановления.",
+      foodTip: "Сделай акцент на белке, железе и теплой еде: мясо/рыба, гречка, зелень, овощи.",
+    };
+  }
+  if (cycleDay <= Math.max(11, cycleLength - 15)) {
+    return {
+      cycleDay,
+      phase: "follicular",
+      title: "Фолликулярная фаза",
+      adjustmentKcal: 0,
+      fatDelta: 0,
+      loadTip: "Энергия обычно растет: хорошо заходят прогрессия весов и более интенсивные тренировки.",
+      foodTip: "Держи стабильный белок и углеводы вокруг тренировки, чтобы поддержать рабочие веса.",
+    };
+  }
+  if (cycleDay <= Math.max(14, cycleLength - 12)) {
+    return {
+      cycleDay,
+      phase: "ovulatory",
+      title: "Овуляторная фаза",
+      adjustmentKcal: 0,
+      fatDelta: 0,
+      loadTip: "Пик энергии возможен, но разминайся особенно тщательно и не игнорируй дискомфорт.",
+      foodTip: "Поддержи тренировку углеводами и водой; белок оставь как в плане.",
+    };
+  }
+  return {
+    cycleDay,
+    phase: "luteal",
+    title: "Лютеиновая фаза",
+    adjustmentKcal: 100,
+    fatDelta: 5,
+    loadTip: "Ближе к ПМС силы могут снижаться: снижай объем, если растет усталость или отеки.",
+    foodTip: "Можно добавить около 100 ккал: больше сложных углеводов/жиров, магний-содержащие продукты и соль по самочувствию.",
+  };
+}
+
+function applyCycleAdjustment(target, settings, dateIso) {
+  const cycleInfo = getCycleInfo(settings, dateIso);
+  if (!cycleInfo || (!cycleInfo.adjustmentKcal && !cycleInfo.fatDelta)) {
+    return target;
+  }
+
+  const kcal = target.kcal + cycleInfo.adjustmentKcal;
+  const protein = target.protein;
+  const fat = target.fat + cycleInfo.fatDelta;
+  const carbs = Math.max(0, (kcal - protein * 4 - fat * 9) / 4);
+  return {
+    ...target,
+    kcal,
+    protein,
+    fat,
+    carbs,
+    cycleAdjustment: cycleInfo,
+  };
+}
+
+function normalizeManualTarget(target, fallback) {
+  return {
+    kcal: target?.kcal || fallback.kcal,
+    protein: target?.protein || round(fallback.protein),
+    fat: target?.fat || round(fallback.fat),
+    carbs: target?.carbs || round(fallback.carbs),
+  };
+}
+
+function readManualTarget(dayType) {
+  const prefix = dayType === "rest" ? "manualRest" : "manualTraining";
+  return {
+    kcal: toNumber(elements[`${prefix}Kcal`].value, 0) || "",
+    protein: toNumber(elements[`${prefix}Protein`].value, 0) || "",
+    fat: toNumber(elements[`${prefix}Fat`].value, 0) || "",
+    carbs: toNumber(elements[`${prefix}Carbs`].value, 0) || "",
+  };
+}
+
+function persistManualTargetsFromInputs() {
+  const settings = getProfileSettingsFromForm();
+  state.profile.settings = settings;
+  saveState();
+}
+
+function rebalanceManualTarget(dayType, changedField) {
+  const prefix = dayType === "rest" ? "manualRest" : "manualTraining";
+  const kcalInput = elements[`${prefix}Kcal`];
+  const proteinInput = elements[`${prefix}Protein`];
+  const fatInput = elements[`${prefix}Fat`];
+  const carbsInput = elements[`${prefix}Carbs`];
+  const kcal = toNumber(kcalInput.value, 0);
+  const protein = toNumber(proteinInput.value, 0);
+  const fat = toNumber(fatInput.value, 0);
+  const carbs = toNumber(carbsInput.value, 0);
+
+  if (!kcal) return;
+
+  if (changedField === "carbs") {
+    const nextFat = Math.max(0, (kcal - protein * 4 - carbs * 4) / 9);
+    fatInput.value = round(nextFat);
+    return;
+  }
+
+  const nextCarbs = Math.max(0, (kcal - protein * 4 - fat * 9) / 4);
+  carbsInput.value = round(nextCarbs);
+}
+
 function computeNutritionSummary() {
   const dayType = resolveDayType();
-  const target = TARGETS[dayType];
+  const target = getUserTargets(dayType);
   const breakfastCoreTotals = sumFoodItems(state.nutrition.breakfastItems);
   const dinnerTotals = sumFoodItems(state.nutrition.dinnerItems);
   const biolactItems = state.nutrition.includeBiolact ? [{ foodId: "biolactTema", grams: 206 }] : [];
@@ -3163,16 +4207,38 @@ function saveWorkoutLog() {
 
   if (!exercises.length) return;
 
+  const editingLogCreatedAt = state.workouts.editingLogCreatedAt || null;
   const log = {
     date: state.workouts.date,
     type: state.workouts.type,
     exercises,
     notes: state.workouts.notes.trim(),
-    createdAt: Date.now(),
+    createdAt: editingLogCreatedAt || Date.now(),
   };
 
-  state.profile.workoutLogs = [log, ...state.profile.workoutLogs].slice(0, 24);
-  state.workouts.notes = "";
+  if (editingLogCreatedAt) {
+    let replaced = false;
+    state.profile.workoutLogs = state.profile.workoutLogs.map((existingLog) => {
+      if (existingLog.createdAt === editingLogCreatedAt) {
+        replaced = true;
+        return log;
+      }
+      return existingLog;
+    });
+    if (!replaced) {
+      state.profile.workoutLogs = [log, ...state.profile.workoutLogs];
+    }
+  } else {
+    state.profile.workoutLogs = [log, ...state.profile.workoutLogs];
+  }
+
+  state.profile.workoutLogs = state.profile.workoutLogs
+    .sort((a, b) => {
+      const dateDiff = b.date.localeCompare(a.date);
+      return dateDiff || ((b.createdAt || 0) - (a.createdAt || 0));
+    })
+    .slice(0, 24);
+  state.workouts.editingLogCreatedAt = null;
   saveState();
   renderAll();
 }
@@ -3258,6 +4324,10 @@ function saveState() {
 function syncActiveAccountData() {
   if (!state.activeAccountId) return;
   const accountData = getActiveAccountData();
+  accountData.profileSettings = {
+    ...createDefaultProfileSettings(),
+    ...(state.profile.settings || {}),
+  };
   accountData.customFoods = deepClone(state.profile.customFoods || []);
   accountData.savedDays = deepClone(state.profile.savedDays || []);
   accountData.showDessertLibrary = !!state.profile.showDessertLibrary;
@@ -3282,6 +4352,7 @@ function syncActiveAccountData() {
       type: state.workouts.type,
       exercises: deepClone(state.workouts.exercises || []),
       notes: state.workouts.notes || "",
+      editingLogCreatedAt: state.workouts.editingLogCreatedAt || null,
     };
   }
 }
